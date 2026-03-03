@@ -85,7 +85,7 @@
 ### IV. Logística y Control
 
 16. Envios
-    - Atributos: `id_envio`, `fecha_salida`, `destino`, `guia_transporte`, `costo_envio`.
+    - Atributos: `id_envio`, `fecha_salida`, `destino`, `guia_transporte`, `costo_envio`, 'fecha_entrega_estimada'
     - Relación (N:1): Alquiler | Compras
     - Relación (N:1): Vehiculos
     - Relación (1:1): Checklist_Entrega
@@ -111,7 +111,7 @@
     - Relación (1:N): Pagos
     - Relación (1:N): Multas
 21. Detalle_Facturas
-    - Atributos: `id_detalle`, `concepto`, `cantidad`, `subtotal`, `descuento_aplicado`.
+    - Atributos: id_detalle, id_articulo, cantidad, costo_unitario, descuento_aplicado, subtotal
     - Relación (N:1): Facturas
 22. Pagos
     - Atributos: `id_pago`, `monto`, `fecha_pago`, `referencia_bancaria`, `estado_pago`.
