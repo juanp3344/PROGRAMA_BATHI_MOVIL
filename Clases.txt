@@ -1,155 +1,304 @@
-### I. Entidades de Activos y Producto
-
-1. Articulo
-    - Atributos: `id_articulo`, `nombre`, `marca`, `descripcion_general`
-2. Portatiles
-    - Atributos: `id_portatil`
-    - Relación (N:1): Tipos_Portatiles
-    - Relación (N:1): Sedes
-    - Relación (1:N): Historial_Entrega
-    - Relación (M:N): Portatiles_Implementos
-    - Relación (M:N): Prestamos_Portatiles
-3. Tipos_Portatiles
-    - Atributos: `id_tipo`, `nombre`, `descripcion`,
-    - Relación (1:N): Portatiles
-    - Relación (1:N): Historial_Precios
-    - Relación (M:N): Tipos_Implementos_Base
-4. Sedes
-    - Atributos: `id_sede`, `nombre`, `direccion`, `ciudad`, `telefono_contacto`.
-    - Relación (1:N): Portatiles
-    - Relación (M:N): Sedes_Implementos
-5. Implementos (Hereda de Articulo)
-    - Atributos: `id_implemento`, `unidad_medida`, `stock_global`
-    - Relación (1:N): Historial_Precios
-    - Relación (M:N): Sedes_Implementos
-    - Relación (M:N): Portatiles_Implementos
-    - Relación (M:N): Mantenimiento_Implementos
-    - Relación (M:N): Tipos_Implementos_Base
-6. Historial_Precios
-    - Atributos: `id_historial`, `valor`, `fecha_inicio`, `fecha_fin`, `motivo_cambio`.
-    - Relación (N:1): Tipos_Portatiles
-    - Relación (N:1): Implementos
+# **I. Entidades Base**
 
 ---
 
-### II. Entidades de Actores y Acceso
+### **1. Articulos**
 
-7. Clientes
-    - Atributos: `id_cliente`, `razon_social`, `nit_cc`, `telefono`, `correo`, `direccion_fiscal`.
-    - Relación (1:N): Contratos
-    - Relación (1:N): Facturas
-8. Empleados
-    - Atributos: `id_empleado`, `nombre`, `documento`, `telefono`, `correo`, `fecha_ingreso`.
-    - Relación (N:1): Roles_Empleados
-    - Relación (M:N): Envios_Empleados
-    - Relación (M:N): Empleados_Mantenimientos
-9. Usuarios
-    - Atributos: `id_usuario`, `username`, `password_hash`, `activo`, `fecha_ultimo_acceso`.
-    - Relación (N:1): Roles_Empleados
-10. Roles_Empleados
-    - Atributos: `id_rol`, `nombre_rol`.
-    - Relación (1:N): Empleados
-    - Relación (1:N): Usuarios
+- **Atributos:**
+    
+    `id_articulo`, `marca`, `descripcion_general`, `vida_util` , **`costo_promedio`**
+    
+- **Relaciones:**
+    - (1:N) con Implementos
+    - (1:N) con Tipo_Implemento
+    - (1:N) con Detalle_Facturas
+    - (1:N) con Mantenimiento_Elementos
 
 ---
 
-### III. Entidades Comerciales y Operativas
+### **2. Bodegas**
 
-11. Contratos
-    - Atributos: `id_contrato`, `fecha_firma`, `terminos`
-    - Relación (N:1): Clientes
-    - Relación (1:1): Alquiler
-    - Relación (1:1): Compras
-12. Alquiler
-    - Atributos: `id_alquiler`, `id_contrato`, `fecha_inicio`, `fecha_fin_prevista`
-    - Relación (1:1): Contratos
-    - Relación (1:N): Envios
-    - Relación (1:N): Mantenimiento
-    - Relación (M:N): Prestamos_Portatiles
-13. Compras
-    - Atributos: `id_compra`, `id_contrato`, `fecha_compra`, `monto_total`, `metodo_pago`.
-    - Relación (1:1): Contratos
-    - Relación (1:1): Garantia
-14. Garantia
-    - Atributos: `id_garantia`, `id_compra`, `fecha_expiracion`, `cobertura`, `proveedor_servicio`.
-    - Relación (1:1): Compras
-15. Mantenimiento
-    - Atributos: `id_mantenimiento`, `fecha_servicio`, `es_en_sitio`, `costo_mano_obra`.
-    - Relación (N:1): Portatiles
-    - Relación (N:1): Alquiler
-    - Relación (M:N): Empleados_Mantenimientos
-    - Relación (M:N): Mantenimiento_Implementos
+- **Atributos:**
+    
+    `id_bodega`, `nombre`, `ubicacion`, `capacidad_maxima`, `encargado_actual`
+    
+- **Relaciones:**
+    - (1:N) con Implementos
 
 ---
 
-### IV. Logística y Control
+### **3. Portatiles**
 
-16. Envios
-    - Atributos: `id_envio`, `fecha_salida`, `destino`, `guia_transporte`, `costo_envio`, 'fecha_entrega_estimada'
-    - Relación (N:1): Alquiler | Compras
-    - Relación (N:1): Vehiculos
-    - Relación (1:1): Checklist_Entrega
-    - Relación (M:N): Envios_Empleados
-17. Vehiculos
-    - Atributos: `id_vehiculo`, `placa`, `modelo`, `capacidad_carga_kg`, `vencimiento_soat`.
-    - Relación (1:N): Envios
-18. Checklist_Entrega
-    - Atributos: `id_checklist`, 'todo_ok', `danos_visibles`, `fecha_verificacion`, 
-    - Relación (1:1): Envios
-19. Historial_Entrega
-    - Atributos: `id_historial`, `estado`, `fecha_evento`, `ubicacion_gps`
-    - Relación (N:1): Portatiles
+- **Atributos:**
+    
+    `id_portatil`, `numero_serial`, `fecha_fabricacion`, `estado_actual`, `id_tipo`, `id_sede`
+    
+- **Relaciones:**
+    - (N:1) con Tipos_Portatiles → FK: `id_tipo`
+    - (N:1) con Sedes → FK: `id_sede`
+    - (1:N) con Implementos
+    - (1:N) con Mantenimiento
+    - (1:N) con Prestamos_Portatiles
 
 ---
 
-### V. Finanzas
+### **4. Tipos_Portatiles**
 
-20. Facturas
-    - Atributos: `id_factura`, `numero`, `fecha_emision`, `total`, `impuesto_iva`.
-    - Relación (N:1): Clientes
-    - Relación (1:N): Detalle_Facturas
-    - Relación (1:N): Pagos
-    - Relación (1:N): Multas
-21. Detalle_Facturas
-    - Atributos: id_detalle, id_articulo, cantidad, costo_unitario, descuento_aplicado, subtotal
-    - Relación (N:1): Facturas
-22. Pagos
-    - Atributos: `id_pago`, `monto`, `fecha_pago`, `referencia_bancaria`, `estado_pago`.
-    - Relación (N:1): Facturas
-23. Multas
-    - Atributos: `id_multa`, `motivo`, `valor`, `fecha_imposicion`, `evidencia_url`.
-    - Relación (N:1): Facturas
-    - Relación (N:1): Portatiles
+- **Atributos:**
+    
+    `id_tipo`, `nombre`, `descripcion`, `altura`, `ancho`, `largo`
+    
+- **Relaciones:**
+    - (1:N) con Portatiles
+    - (1:N) con Historial_Precios
+    - (1:N) con Tipo_Implemento
 
 ---
 
-### VI. Entidades Intermedias (Vínculos M:N)
+### **5. Sedes**
 
-24. Sedes_Implementos
-    - Atributos: `id_sede_implemento`, `id_sede`, `id_implemento`, `stock_local`,
-    - Relación (N:1): Sedes
-    - Relación (N:1): Implementos
-25. Tipos_Implementos_Base
-    - Atributos: `id_tipo_implemento`, `id_tipo_portatil`, `id_implemento`, `cantidad_estandar`, `es_obligatorio`.
-    - Relación (N:1): Tipos_Portatiles
-    - Relación (N:1): Implementos
-26. Portatiles_Implementos
-    - Atributos: `id_portatil_implemento`, `id_portatil`, `id_implemento`, `estado_fisico_pieza`, `fecha_instalacion`.
-    - Relación (N:1): Portatiles
-    - Relación (N:1): Implementos
-27. Prestamos_Portatiles
-    - Atributos: `id_prestamo`, `id_alquiler`, `id_portatil`, `fecha_entrega_real`, `fecha_devolucion_real`.
-    - Relación (N:1): Alquiler
-    - Relación (N:1): Portatiles
-28. Empleados_Mantenimientos
-    - Atributos: `id_emp_mant`, `id_empleado`, `id_mantenimiento`, `horas_trabajadas`, `calificacion_servicio`.
-    - Relación (N:1): Empleados
-    - Relación (N:1): Mantenimiento
-29. Mantenimiento_Implementos
-    - Atributos: `id_mant_imp`, `id_mantenimiento`, `id_implemento`, `cantidad_consumida`, `costo_unitario_momento`.
-    - Relación (N:1): Mantenimiento
-    - Relación (N:1): Implementos
-30. Envios_Empleados
-    - Atributos: `id_envio_emp`, `id_envio`, `id_empleado`, `rol_en_envio`, `viaticos_asignados`.
-    - Relación (N:1): Envios
-    - Relación (N:1): Empleados
+- **Atributos:**
+    
+    `id_sede`, `nombre`, `direccion`, `ciudad`, `telefono_contacto`
+    
+- **Relaciones:**
+    - (1:N) con Portatiles
+
+---
+
+### **6. Implementos**
+
+- **Atributos:**
+    
+    `id_implemento`, `id_articulo`, `id_portatil`, `id_bodega`, `estado`
+    
+- **Relaciones:**
+    - (N:1) con Articulos → FK: `id_articulo`
+    - (N:1) con Portatiles → FK: `id_portatil`
+    - (N:1) con Bodegas → FK: `id_bodega`
+
+---
+
+### **7. Tipo_Implemento**
+
+- **Atributos:**
+    
+    `id_tipo_implemento`, `id_tipo`, `id_articulo`, `cantidad_requerida`
+    
+- **Relaciones:**
+    - (N:1) con Tipos_Portatiles → FK: `id_tipo`
+    - (N:1) con Articulos → FK: `id_articulo`
+
+---
+
+### **8. Aseo_elementos : Articulos**
+
+- **Atributos:**
+    
+    `id_aseo_elemento`, `uso`, `fecha_vencimiento`, `unidad_medida`, **`instrucciones_uso`**
+    
+
+---
+
+### **9. Historial_Precios**
+
+- **Atributos:**
+    
+    `id_historial`, `valor`, `fecha_inicio`, `fecha_fin`, `motivo_cambio`, `id_tipo`
+    
+- **Relaciones:**
+    - (N:1) con Tipos_Portatiles → FK: `id_tipo`
+
+---
+
+# **II. Entidades de Actores y Acceso**
+
+---
+
+### **10. Clientes**
+
+- **Atributos:**
+    
+    `id_cliente`, `razon_social`, `nit_cc`, `telefono`, `correo`, `direccion_fiscal`
+    
+- **Relaciones:**
+    - (1:N) con Contratos
+    - (1:N) con Facturas
+
+---
+
+### **11. Empleados**
+
+- **Atributos:**
+    
+    `id_empleado`, `nombre`, `documento`, `telefono`, `correo`, `fecha_ingreso`, `id_rol`
+    
+- **Relaciones:**
+    - (N:1) con Roles_Empleados → FK: `id_rol`
+    - (1:N) con Mantenimiento
+    - (1:N) con Envios
+
+---
+
+### **12. Usuarios**
+
+- **Atributos:**
+    
+    `id_usuario`, `username`, `password_hash`, `activo`, `fecha_ultimo_acceso`, `id_rol`
+    
+- **Relaciones:**
+    - (N:1) con Roles_Empleados → FK: `id_rol`
+
+---
+
+### **13. Roles_Empleados**
+
+- **Atributos:**
+    
+    `id_rol`, `nombre_rol`, **`descripcion_rol`**, **`salario_base`** 
+    
+- **Relaciones:**
+    - (1:N) con Empleados
+    - (1:N) con Usuarios
+
+---
+
+# **III. Entidades Comerciales y Operativas**
+
+---
+
+### **14. Contratos**
+
+- **Atributos:**
+    
+    `id_contrato`, `fecha_firma`, `terminos`, `fecha_expiracion`, `id_cliente`
+    
+- **Relaciones:**
+    - (N:1) con Clientes → FK: `id_cliente`
+    - (1:1) con Prestamos
+    - (1:1) con Compras
+
+---
+
+### **15. Prestamos**
+
+- **Atributos:**
+    
+    `id_prestamo`, `id_contrato`, `fecha_inicio`, `fecha_fin_prevista`, `estado_prestamo`
+    
+- **Relaciones:**
+    - (N:1) con Contratos → FK: `id_contrato`
+    - (1:N) con Envios
+    - (1:N) con Mantenimiento
+    - (1:N) con Prestamos_Portatiles
+
+---
+
+### **16. Compras**
+
+- **Atributos:**
+    
+    `id_compra`, `id_contrato`, `fecha_compra`, `monto_total`, `metodo_pago`, `garantia_meses`
+    
+- **Relaciones:**
+    - (N:1) con Contratos → FK: `id_contrato`
+
+---
+
+### **17. Mantenimiento**
+
+- **Atributos:**
+    
+    `id_mantenimiento`, `fecha_servicio`, `tipo_mantenimiento`, `descripcion_trabajo`, `costo_mano_obra`, `costo_total`, `id_portatil`, `id_prestamo`, `id_empleado`
+    
+- **Relaciones:**
+    - (N:1) con Portatiles → FK: `id_portatil`
+    - (N:1) con Prestamos → FK: `id_prestamo`
+    - (N:1) con Empleados → FK: `id_empleado`
+    - (1:N) con Mantenimiento_Elementos
+
+---
+
+### **18. Mantenimiento_Elementos**
+
+- **Atributos:**
+    
+    `id_mantenimiento_elemento`, `id_mantenimiento`, `id_articulo`, `cantidad_utilizada`
+    
+- **Relaciones:**
+    - (N:1) con Mantenimiento → FK: `id_mantenimiento`
+    - (N:1) con Articulos → FK: `id_articulo`
+
+---
+
+# **IV. Logística**
+
+---
+
+### **19. Envios**
+
+- **Atributos:**
+    
+    `id_envio`, `fecha_salida`, `destino`, `costo_envio`, `fecha_entrega_estimada`, `id_prestamo`, `id_empleado`
+    
+- **Relaciones:**
+    - (N:1) con Prestamos → FK: `id_prestamo`
+    - (N:1) con Empleados → FK: `id_empleado`
+
+---
+
+# **V. Finanzas**
+
+---
+
+### **20. Facturas**
+
+- **Atributos:**
+    
+    `id_factura`, `numero`, `fecha_emision`, `total`, `impuesto_iva`, `id_cliente`
+    
+- **Relaciones:**
+    - (N:1) con Clientes → FK: `id_cliente`
+    - (1:N) con Detalle_Facturas
+    - (1:N) con Pagos
+
+---
+
+### **21. Detalle_Facturas**
+
+- **Atributos:**
+    
+    `id_detalle`, `id_factura`, `id_articulo`, `cantidad`, `costo_unitario`, `descuento_aplicado`, `subtotal`
+    
+- **Relaciones:**
+    - (N:1) con Facturas → FK: `id_factura`
+    - (N:1) con Articulos → FK: `id_articulo`
+
+---
+
+### **22. Pagos**
+
+- **Atributos:**
+    
+    `id_pago`, `monto`, `fecha_pago`, `referencia_bancaria`,`metodo_pago`, `id_factura`
+    
+- **Relaciones:**
+    - (N:1) con Facturas → FK: `id_factura`
+
+---
+
+# **VI. Entidades Intermedias**
+
+---
+
+### **23. Prestamos_Portatiles**
+
+- **Atributos:**
+    
+    `id_prestamo_portatil`, `id_prestamo`, `id_portatil`
+    
+- **Relaciones:**
+    - (N:1) con Prestamos → FK: `id_prestamo`
+    - (N:1) con Portatiles → FK: `id_portatil`
+
+---
