@@ -11,7 +11,7 @@ public class Articulos
 
     // 1:N
     public List<Implementos>? Implementos { get; set; }
-    public List<Tipo_Implemento>? Tipo_Implementos { get; set; }
+    public List<Tipo_Implementos>? Tipo_Implementos { get; set; }
     public List<Detalle_Facturas>? Detalle_Facturas { get; set; }
     public List<Mantenimiento_Elementos>? Mantenimiento_Elementos { get; set; }
 }
@@ -25,7 +25,7 @@ public class Tipo_Aseo_Elementos : Articulos
 }
 public class Tipo_Implementos : Articulos
 {
-    public int Id_Tipo_Implemento { get; set; }
+    public int Id_Tipo_Implementos { get; set; }
     public string Nombre { get; set; }   
     public string Descripcion { get; set; }
     public decimal ancho { get; set; }
@@ -42,9 +42,9 @@ public class Implementos
     // N:1
     public int Id_Portatil { get; set; }
     public int Id_Bodega { get; set; }
-    public int Tipo_Implemento { get; set; }
+    public int Tipo_Implementos { get; set; }
 
-    public Tipo_Implementos? _Tipo_Implemento { get; set; }
+    public Tipo_Implementos? _Tipo_Implementos { get; set; }
     public Portatiles? _Portatil { get; set; }
     public Bodegas? _Bodega { get; set; }
 
@@ -54,7 +54,7 @@ public class Implementos
 public class Aseo_Elementos 
 {
     public DateTime Fecha_Vencimiento { get; set; }
-    public Int Cantidad { get; set; }
+    public int Cantidad { get; set; }
 
     // N:1
     public int Id_Tipo_Aseo_Elementos { get; set; }
@@ -94,7 +94,7 @@ public class Tipos_Portatiles
     // 1:N
     public List<Portatiles>? Portatiles { get; set; }
     public List<Historial_Precios>? Historial_Precios { get; set; }
-    public List<Tipo_Implemento>? Tipo_Implementos { get; set; }
+    public List<Tipo_Implementos>? Tipo_Implementos { get; set; }
 }
 
 public class Sedes
