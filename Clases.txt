@@ -2,11 +2,11 @@
 
 ---
 
-### **1. Articulos**
+### **1. Articulos
 
 - **Atributos:**
     
-    `id_articulo`, `marca`, `descripcion_general`, `vida_util` , **`costo_promedio`**
+    `id_articulo`, `marca`, `descripcion_general`, `vida_util` , `costo_promedio`
     
 - **Relaciones:**
     - (1:N) con Implementos
@@ -155,7 +155,7 @@
 
 - **Atributos:**
     
-    `id_rol`, `nombre_rol`, **`descripcion_rol`**, **`salario_base`** 
+    `id_rol`, `nombre_rol`, `descripcion_rol`, `salario_base` 
     
 - **Relaciones:**
     - (1:N) con Empleados
