@@ -606,9 +606,11 @@ public class Mantenimiento
     // N:1
     public int Id_Prestamo { get; set; }
     public int Id_Empleado { get; set; }
+    public int Id_Portatil { get; set; }
 
     public Prestamos? _Prestamo { get; set; }
     public Empleados? _Empleado { get; set; }
+    public Portatiles? _Portatil { get; set; }
 
     // 1:N
     public List<Aseo_Elementos>? Aseo_Elementos { get; set; }
