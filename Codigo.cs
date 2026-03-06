@@ -96,11 +96,11 @@ class Program {
 
         // 11. Clientes 
         var clientes = new List<Clientes> {
-            new Clientes { id_personas = 1, nombre = "Cli Eventos", cedula = "101", correo = "eventos@mail.com", Telefono = "393087409", Razon_Social = "Eventos SA", Nit_CC = "900-1", Tipo_Cliente = 2, Direccion_Fiscal = "Cl 1", Id_Usuario = 1 },
-            new Clientes { id_personas = 2, nombre = "Cli Tomorrowland", cedula = "102", correo = "const@mail.com", Telefono = "375849385", Razon_Social = "Constructora Civil", Nit_CC = "900-2",Tipo_Cliente = 1, Direccion_Fiscal = "Av 2", Id_Usuario = 2 },
-            new Clientes { id_personas = 3, nombre = "Cli Alcaldia", cedula = "103", correo = "alcaldia@mail.com", Telefono = "3449485710", Razon_Social = "Alcaldía Local", Nit_CC = "900-3",Tipo_Cliente = 3, Direccion_Fiscal = "Pza Central", Id_Usuario = 3 },
-            new Clientes { id_personas = 4, nombre = "Cli Rock", cedula = "104", correo = "rock@mail.com", Telefono = "3309458499", Razon_Social = "Festivales Rock", Nit_CC = "900-4",Tipo_Cliente = 2, Direccion_Fiscal = "Parque 4", Id_Usuario = 4 },
-            new Clientes { id_personas = 5, nombre = "Cli Minera", cedula = "105", correo = "minera@mail.com", Telefono = "3890394857", Razon_Social = "Minera Norte", Nit_CC = "900-5", Tipo_Cliente = 4, Direccion_Fiscal = "Km 5", Id_Usuario = 5 }
+            new Clientes { id_personas = 1, nombre = "Cli Eventos", cedula = "101", correo = "eventos@mail.com", Telefono = "393087409", Razon_Social = "Eventos SA", Nit_CC = "900-1", Tipo_Cliente = (Clientes.CategoriaCliente)2, Direccion_Fiscal = "Cl 1", Id_Usuario = 1 },
+            new Clientes { id_personas = 2, nombre = "Cli Tomorrowland", cedula = "102", correo = "const@mail.com", Telefono = "375849385", Razon_Social = "Constructora Civil", Nit_CC = "900-2",Tipo_Cliente = (Clientes.CategoriaCliente)1, Direccion_Fiscal = "Av 2", Id_Usuario = 2 },
+            new Clientes { id_personas = 3, nombre = "Cli Alcaldia", cedula = "103", correo = "alcaldia@mail.com", Telefono = "3449485710", Razon_Social = "Alcaldía Local", Nit_CC = "900-3",Tipo_Cliente = (Clientes.CategoriaCliente)3, Direccion_Fiscal = "Pza Central", Id_Usuario = 3 },
+            new Clientes { id_personas = 4, nombre = "Cli Rock", cedula = "104", correo = "rock@mail.com", Telefono = "3309458499", Razon_Social = "Festivales Rock", Nit_CC = "900-4",Tipo_Cliente = (Clientes.CategoriaCliente)2, Direccion_Fiscal = "Parque 4", Id_Usuario = 4 },
+            new Clientes { id_personas = 5, nombre = "Cli Minera", cedula = "105", correo = "minera@mail.com", Telefono = "3890394857", Razon_Social = "Minera Norte", Nit_CC = "900-5", Tipo_Cliente = (Clientes.CategoriaCliente)4, Direccion_Fiscal = "Km 5", Id_Usuario = 5 }
         };
 
         // 12. Empleados 
