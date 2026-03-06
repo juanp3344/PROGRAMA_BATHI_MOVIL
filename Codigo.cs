@@ -398,7 +398,10 @@ public class Aseo_Elementos
 
     // N:1
     public int Id_Tipo_Aseo_Elementos { get; set; }
+    public int Id_Mantenimiento { get; set; }
+    public Mantenimiento? _Mantenimiento { get; set; }
     public Tipo_Aseo_Elementos? _Tipo_Aseo_Elemento { get; set; }
+
 }
 
 
