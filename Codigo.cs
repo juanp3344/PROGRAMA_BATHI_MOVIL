@@ -135,11 +135,11 @@ class Program {
 
         // 15. Contratos
         var listaContratos = new List<Contratos> {
-            new Contratos { Id_Contratos = 1, Fecha_Firma = DateTime.Now.AddDays(-30), Terminos = "Alquiler mensual con mantenimiento", Fecha_Expiracion = DateTime.Now.AddMonths(6), Id_Cliente = 6 },
-            new Contratos { Id_Contratos = 2, Fecha_Firma = DateTime.Now.AddDays(-15), Terminos = "Evento fin de semana", Fecha_Expiracion = DateTime.Now.AddDays(5), Id_Cliente = 9 },
-            new Contratos { Id_Contratos = 3, Fecha_Firma = DateTime.Now.AddDays(-60), Terminos = "Compra de 5 unidades estándar", Fecha_Expiracion = DateTime.Now.AddDays(30), Id_Cliente = 7 },
-            new Contratos { Id_Contratos = 4, Fecha_Firma = DateTime.Now.AddDays(-10), Terminos = "Licitación pública anual", Fecha_Expiracion = DateTime.Now.AddYears(1), Id_Cliente = 8 },
-            new Contratos { Id_Contratos = 5, Fecha_Firma = DateTime.Now, Terminos = "Uso industrial continuo", Fecha_Expiracion = DateTime.Now.AddMonths(12), Id_Cliente = 10 }
+            new Contratos { Id_Contratos = 1, Fecha_Firma = DateTime.Now.AddDays(-30), Terminos = "Alquiler mensual con mantenimiento", Fecha_Expiracion = DateTime.Now.AddMonths(6), Id_Cliente = 4},
+            new Contratos { Id_Contratos = 2, Fecha_Firma = DateTime.Now.AddDays(-15), Terminos = "Evento fin de semana", Fecha_Expiracion = DateTime.Now.AddDays(5), Id_Cliente = 3},
+            new Contratos { Id_Contratos = 3, Fecha_Firma = DateTime.Now.AddDays(-60), Terminos = "Compra de 5 unidades estándar", Fecha_Expiracion = DateTime.Now.AddDays(30), Id_Cliente = 1},
+            new Contratos { Id_Contratos = 4, Fecha_Firma = DateTime.Now.AddDays(-10), Terminos = "Licitación pública anual", Fecha_Expiracion = DateTime.Now.AddYears(1), Id_Cliente = 2},
+            new Contratos { Id_Contratos = 5, Fecha_Firma = DateTime.Now, Terminos = "Uso industrial continuo", Fecha_Expiracion = DateTime.Now.AddMonths(12), Id_Cliente = 5}
         };
 
         // 16. Prestamos
@@ -188,11 +188,11 @@ class Program {
 
         // 20. Facturas
         var listaFacturas = new List<Facturas> {
-            new Facturas { Id_Factura = 1, Numero = "FAC-101", Fecha_Emision = DateTime.Now.AddDays(-10), Total = 1190000, Impuesto_Iva = 190000, Id_Cliente = 6 },
-            new Facturas { Id_Factura = 2, Numero = "FAC-102", Fecha_Emision = DateTime.Now.AddDays(-5), Total = 2380000, Impuesto_Iva = 380000, Id_Cliente = 9 },
-            new Facturas { Id_Factura = 3, Numero = "FAC-103", Fecha_Emision = DateTime.Now.AddDays(-2), Total = 595000, Impuesto_Iva = 95000, Id_Cliente = 7 },
-            new Facturas { Id_Factura = 4, Numero = "FAC-104", Fecha_Emision = DateTime.Now.AddDays(-1), Total = 4760000, Impuesto_Iva = 760000, Id_Cliente = 8 },
-            new Facturas { Id_Factura = 5, Numero = "FAC-105", Fecha_Emision = DateTime.Now, Total = 1785000, Impuesto_Iva = 285000, Id_Cliente = 10 }
+            new Facturas { Id_Factura = 1, Numero = "FAC-101", Fecha_Emision = DateTime.Now.AddDays(-10), Total = 1190000, Impuesto_Iva = 190000, Id_Cliente = 2},
+            new Facturas { Id_Factura = 2, Numero = "FAC-102", Fecha_Emision = DateTime.Now.AddDays(-5), Total = 2380000, Impuesto_Iva = 380000, Id_Cliente = 3},
+            new Facturas { Id_Factura = 3, Numero = "FAC-103", Fecha_Emision = DateTime.Now.AddDays(-2), Total = 595000, Impuesto_Iva = 95000, Id_Cliente = 1},
+            new Facturas { Id_Factura = 4, Numero = "FAC-104", Fecha_Emision = DateTime.Now.AddDays(-1), Total = 4760000, Impuesto_Iva = 760000, Id_Cliente = 4},
+            new Facturas { Id_Factura = 5, Numero = "FAC-105", Fecha_Emision = DateTime.Now, Total = 1785000, Impuesto_Iva = 285000, Id_Cliente = 5}
         };
 
         // 21. Detalle_Facturas
@@ -477,7 +477,6 @@ public class Clientes : Personas
     Industrial = 4,
     Particular = 5
 }
-    public int Id_Personas { get; set; }
     public string Razon_Social { get; set; }
     public string Nit_CC { get; set; }
     public string Direccion_Fiscal { get; set; }
@@ -490,7 +489,6 @@ public class Clientes : Personas
 
 public class Empleados : Personas
 {
-    public int Id_Personas { get; set; }
     public DateTime Fecha_Ingreso { get; set; }
 
     // N:1
