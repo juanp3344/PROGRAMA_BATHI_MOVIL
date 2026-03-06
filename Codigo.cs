@@ -478,7 +478,7 @@ public class Clientes : Personas
     public string Razon_Social { get; set; }
     public string Nit_CC { get; set; }
     public string Direccion_Fiscal { get; set; }
-    public string Tipo_Cliente { get; set; }
+    public CategoriaCliente Tipo_Cliente { get; set; }
 
     // 1:N
     public List<Contratos>? Contratos { get; set; }
@@ -554,6 +554,8 @@ public class Contratos
     // 1:1
     public Prestamos? Prestamo { get; set; }
     public Compras? Compra { get; set; }
+    // 1:N
+    public List<Envios>? Envios { get; set; }
 
 }
 
@@ -571,7 +573,6 @@ public class Prestamos
 
   
     // 1:N
-    public List<Envios>? Envios { get; set; }
     public List<Mantenimiento>? Mantenimientos { get; set; }
     public List<Prestamos_Portatiles>? Prestamos_Portatiles { get; set; }
 }
