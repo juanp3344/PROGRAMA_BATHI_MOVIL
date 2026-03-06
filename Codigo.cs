@@ -1,5 +1,6 @@
-
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 class Program {
     static void Main(string[] args) 
@@ -266,15 +267,15 @@ class Program {
 
     public class OperacionesBaños
     {
-        // 1. ALERTAS DE LOGÍSTICA: Envíos que no se han entregado a tiempo
+        // 1. ALERTAS DE LOGÍSTICA: Envíos que no se han entregado a tiempo (CLASE Envios)
         public int ObtenerEnviosRetrasados(List<Envios> envios) => 
             envios.Count(e => e.Fecha_Entrega_Estimada < DateTime.Now);
 
-        // 2. DISPONIBILIDAD DE STOCK: Baños listos para alquilar en una sede específica
+        // 2. DISPONIBILIDAD DE STOCK: Baños listos para alquilar en una sede específica (CLASE Sedes)
         public int StockDisponibleSede(int idSede, List<Portatiles> inventario) => 
             inventario.Count(p => p.Id_Sede == idSede && p.Estado_Actual == "Disponible");
 
-        // 3. CARTERA POR COBRAR: Total de dinero que los clientes deben 
+        // 3. CARTERA POR COBRAR: Total de dinero que los clientes deben (CLASE Clientes)
         public decimal CalcularCarteraPendiente(List<Facturas> facturas, List<Pagos> pagos)
         {
             decimal totalFacturado = facturas.Sum(f => f.Total);
@@ -282,11 +283,11 @@ class Program {
             return totalFacturado - totalRecaudado;
         }
 
-        // 4. RENDIMIENTO OPERATIVO: Costo total de mantenimientos realizados por un empleado
+        // 4. RENDIMIENTO OPERATIVO: Costo total de mantenimientos realizados por un empleado (CLASE Empleados)
         public decimal GastoMantenimientoPorTecnico(int idEmp, List<Mantenimiento> mant) => 
             mant.Where(m => m.Id_Empleado == idEmp).Sum(m => m.Costo_Mano_Obra);
 
-        // 5. ALERTAS DE CONTRATOS: Contratos que vencen en los próximos 30 días
+        // 5. ALERTAS DE CONTRATOS: Contratos que vencen en los próximos 30 días (CLASE Contratos)
         public List<Contratos> ContratosPorVencer(List<Contratos> contratos) => 
             contratos.Where(c => c.Fecha_Expiracion >= DateTime.Now && 
                                 c.Fecha_Expiracion <= DateTime.Now.AddDays(30)).ToList();
@@ -417,10 +418,6 @@ public class Sedes
     // 1:N
     public List<Portatiles>? Portatiles { get; set; }
     public List<Bodegas>? Bodegas { get; set; }
-
-    // Funcion 
-    public int StockDisponibleSede(List<Portatiles> inventario) => 
-        inventario.Count(p => p.Id_Sede == this.Id_Sede && p.Estado_Actual == "Disponible");
 }
 
 public class Bodegas
@@ -490,7 +487,6 @@ public class Clientes : Personas
     public List<Contratos>? Contratos { get; set; }
     public List<Facturas>? Facturas { get; set; }
 
-    // Funcion 
 }
 
 public class Empleados : Personas
@@ -508,10 +504,6 @@ public class Empleados : Personas
     // 1:N
     public List<Mantenimiento>? Mantenimientos { get; set; }
     public List<Envios>? Envios { get; set; }
-    
-    //Funcion
-    public decimal GastoMantenimientoPorTecnico(List<Mantenimiento> mant) => 
-        mant.Where(m => m.Id_Empleado == this.id_personas).Sum(m => m.Costo_Mano_Obra);
 
     
 }
@@ -567,11 +559,6 @@ public class Contratos
     public Compras? Compra { get; set; }
     // 1:N
     public List<Envios>? Envios { get; set; }
-
-    // Funcion
-    public static List<Contratos> ContratosPorVencer(List<Contratos> lista) => 
-        lista.Where(c => c.Fecha_Expiracion >= DateTime.Now && 
-                         c.Fecha_Expiracion <= DateTime.Now.AddDays(30)).ToList();
 
 }
 
@@ -648,10 +635,6 @@ public class Envios
 
     public Contratos? _Contrato { get; set; }
     public Empleados? _Empleado { get; set; }
-    
-    // Funcion 
-     public int ObtenerEnviosRetrasados(List<Envios> envios) => 
-            envios.Count(e => e.Fecha_Entrega_Estimada < DateTime.Now);
 }
 
 
@@ -674,13 +657,6 @@ public class Facturas
     public List<Detalle_Facturas>? Detalle_Facturas { get; set; }
     public List<Pagos>? Pagos { get; set; }
 
-    // Funcion
-    public static decimal CalcularCarteraPendiente(List<Facturas> facturas, List<Pagos> pagos)
-    {
-        decimal totalFacturado = facturas.Sum(f => f.Total);
-        decimal totalRecaudado = pagos.Sum(p => p.Total_Pagado);
-        return totalFacturado - totalRecaudado;
-    }
 }
 
 public class Detalle_Facturas
